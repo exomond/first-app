@@ -1,35 +1,50 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import React, { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // State to hold the input values and the random number
+  const [min, setMin] = useState('');
+  const [max, setMax] = useState('');
+  const [randomNum, setRandomNum] = useState(null);
+
+  // Generate a random number between the given range
+  const generateRandomNumber = () => {
+    const randNum = Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
+    setRandomNum(randNum);
+  };
 
   return (
-    <>
+    <div className="App">
+      <h1>Random Number Generator</h1>
+
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input
+          type="number"
+          placeholder="Min"
+          value={min}
+          onChange={(e) => setMin(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Max"
+          value={max}
+          onChange={(e) => setMax(e.target.value)}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <button onClick={generateRandomNumber}>Generate</button>
+
+      {randomNum !== null && (
+        <div>
+          <h2>Generated Number:</h2>
+          <p>{randomNum}</p>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
+
