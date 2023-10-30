@@ -1,22 +1,30 @@
 import './App.css'
 import { useState } from 'react';
 
+
 function App() {
-  // State to hold the input values and the random number
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
-  const [randomNum, setRandomNum] = useState(null);
+  const [randomNumber, setRandomNumber] = useState(null);
+  const [showResult, setShowResult] = useState(false);
 
-  // Generate a random number between the given range
-  const generateRandomNumber = () => {
+  const handleGenerate = () => {
     const randNum = Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
-    setRandomNum(randNum);
+    setRandomNumber(randNum);
+    setShowResult(true);
   };
 
   return (
     <div className="App">
+      {showResult && (
+        <div className="overlay">
+          <div className="resultBox">
+            <p>Your random number <br /> between {min} and {max} is: <hr /> {randomNumber} <hr /></p>
+            <button onClick={() => setShowResult(false)}>Close</button>
+          </div>
+        </div>
+      )}
       <h1>Random Number Generator</h1>
-
       <div>
         <input
           type="number"
@@ -31,18 +39,9 @@ function App() {
           onChange={(e) => setMax(e.target.value)}
         />
       </div>
-
-      <button onClick={generateRandomNumber}>Generate</button>
-
-      {randomNum !== null && (
-        <div>
-          <h2>Generated Number:</h2>
-          <p>{randomNum}</p>
-        </div>
-      )}
+      <button onClick={handleGenerate}>Generate</button>
     </div>
   );
 }
 
 export default App;
-
