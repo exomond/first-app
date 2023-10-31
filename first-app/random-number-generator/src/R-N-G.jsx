@@ -9,19 +9,20 @@ function RandomNumberGenerator() {
   const [error, setError] = useState(""); // Add error state
 
   const handleGenerate = () => {
-    if (!min || !max) { // checks If either min or max is falsy (empty, undefined, null, or 0)
-        setError('Minimum and Maximum numbers cannot be empty');
-        setShowResult(false); // Ensure the result box doesn't show
-        return;
-      }
-    if (parseInt(min) <= 0 || parseInt(max) <= 0) { 
-      setError('Minimum and Maximum numbers cannot be zero or negative');
+    if (!min || !max) {
+      // checks If either min or max is falsy (empty, undefined, null, or 0)
+      setError("Minimum and Maximum numbers cannot be empty");
+      setShowResult(false); // Ensure the result box doesn't show
+      return;
+    }
+    if (parseInt(min) <= 0 || parseInt(max) <= 0) {
+      setError("Minimum and Maximum numbers cannot be zero or negative");
       setShowResult(false); // Ensure the result box doesn't show
       return;
     }
 
     if (parseInt(min) > parseInt(max)) {
-      setError('Minimum number cannot be greater than Maximum number');
+      setError("Minimum number cannot be greater than Maximum number");
       setShowResult(false); // Ensure the result box doesn't show
       return;
     }
@@ -38,8 +39,8 @@ function RandomNumberGenerator() {
         <div className="overlay">
           <div className="resultBox">
             <p>
-              Your random number <br /> between {min} and {max} is: <hr />{" "}
-              {randomNumber} <hr />
+              Your random number <br /> between {min} and {max} is: <hr />
+              <div className="resultNumber">{randomNumber}</div> <hr />
             </p>
             <button onClick={() => setShowResult(false)}>Close</button>
           </div>
