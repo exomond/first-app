@@ -141,3 +141,30 @@ p {
   font-size: 1.5em;        /* Increase font size */
   margin: 10px 0;          /* Add some margin to separate it from surrounding text */
 }
+
+/* New styles for the buttons */
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.buttonGroup button {
+  margin: 0 10px; /* Adjust as needed */
+}
+
+
+.closeButton {
+  background-color: #ff4b4b;  /* Red color */
+  color: #ffffff;             /* White text */
+  border: none;
+  padding: 8px 16px;          /* Padding for a better clickable area */
+  border-radius: 5px;         /* Rounded edges for aesthetics */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.closeButton:hover {
+  background-color: #e63939;  /* A slightly darker red for hover effect */
+  cursor: pointer;
+}
+
