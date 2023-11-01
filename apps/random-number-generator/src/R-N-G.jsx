@@ -9,9 +9,9 @@ function RandomNumberGenerator() {
   const [error, setError] = useState(""); // Add error state
 
   const handleGenerate = () => {
-    if (!min || !max) {
+    if (!min || !max || min == max ) {
       // checks If either min or max is falsy (empty, undefined, null, or 0)
-      setError("Minimum and Maximum numbers cannot be empty");
+      setError("Minimum and Maximum numbers cannot be empty or equal");
       return;
     }
     if (parseInt(min) <= 0 || parseInt(max) <= 0) {

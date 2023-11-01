@@ -45,7 +45,7 @@
 /* Basic Reset */
 
 .App {
-  background-color: #f4f4f4;
+  background-color: #c4c4c4;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -68,7 +68,8 @@ input {
   margin: 0 0.5rem;
   border: none;
   border-radius: 8px;
-  outline: none;
+  /* outline: none; */
+  outline-color: rgba(0, 0, 0, 0.500);
   font-size: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -164,7 +165,7 @@ p {
 }
 
 .closeButton:hover {
-  background-color: #e63939;  /* A slightly darker red for hover effect */
+  background-color: #ad2727;  /* A slightly darker red for hover effect */
   cursor: pointer;
 }
 
