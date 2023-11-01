@@ -7,9 +7,10 @@ function RandomNumberGenerator() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [error, setError] = useState(""); // Add error state
+  const [showProgress, setShowProgress] = useState(false);
 
   const handleGenerate = () => {
-    if (!min || !max || min == max ) {
+    if (!min || !max || min == max) {
       // checks If either min or max is falsy (empty, undefined, null, or 0)
       setError("Minimum and Maximum numbers cannot be empty or equal");
       return;
@@ -23,14 +24,29 @@ function RandomNumberGenerator() {
       return;
     }
     setError(""); // Clear previous error
-    const randNum =
-      Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
-    setRandomNumber(randNum);
-    setShowResult(true);
+    // Hide result box and show progress bar
+    setShowResult(false);
+    setShowProgress(true);
+
+    // After 3 seconds delay:
+    setTimeout(() => {
+      const randNum = Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
+      setRandomNumber(randNum);
+      
+      // Hide progress bar and show result box
+      setShowProgress(false);
+      setShowResult(true);
+    }, 1500);  // This is a 3-second delay
   };
 
   return (
     <div className="App">
+      {showProgress && (
+        <div className="progressOverlay">
+          <div className="progressBar"></div>
+        </div>
+      )}
+
       {showResult && (
         <div className="overlay">
           <div className="resultBox">
@@ -39,8 +55,14 @@ function RandomNumberGenerator() {
               <div className="resultNumber">{randomNumber}</div> <hr />
             </p>
             <div className="buttonGroup">
-            <button onClick={handleGenerate}>Again</button>  {/* The "Again" button */}
-            <button className="closeButton" onClick={() => setShowResult(false)}>Close</button>
+              <button onClick={handleGenerate}>Again</button>{" "}
+              {/* The "Again" button */}
+              <button
+                className="closeButton"
+                onClick={() => setShowResult(false)}
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
