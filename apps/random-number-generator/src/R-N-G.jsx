@@ -24,42 +24,40 @@ function RandomNumberGenerator() {
       return;
     }
     setError(""); // Clear previous error
-    // Hide result box and show progress bar
-    setShowResult(false);
-    setShowProgress(true);
+    setShowResult(true); // Show the resultBox with the progress bar immediately
+    setShowProgress(true); // Start showing the progress bar
 
     // After 3 seconds delay:
     setTimeout(() => {
-      const randNum = Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
+      const randNum =
+        Math.floor(Math.random() * (Number(max) - Number(min) + 1)) +
+        Number(min);
       setRandomNumber(randNum);
-      
-      // Hide progress bar and show result box
-      setShowProgress(false);
-      setShowResult(true);
-    }, 1500);  // This is a 3-second delay
+      setShowProgress(false); // Hide the progress bar after the timeout
+    }, 1500); // This is a 3-second delay
   };
 
   return (
     <div className="App">
-      {showProgress && (
-        <div className="progressOverlay">
-          <div className="progressBar"></div>
-        </div>
-      )}
-
       {showResult && (
         <div className="overlay">
           <div className="resultBox">
-            <p>
-              Your random number <br /> between {min} and {max} is: <hr />
-              <div className="resultNumber">{randomNumber}</div> <hr />
-            </p>
+            {showProgress ? (
+              <div className="progressBar"></div>
+            ) : (
+              <p>
+                Your random number <br /> between {min} and {max} is: <hr />
+                <div className="resultNumber">{randomNumber}</div> <hr />
+              </p>
+            )}
             <div className="buttonGroup">
-              <button onClick={handleGenerate}>Again</button>{" "}
-              {/* The "Again" button */}
+              <button onClick={handleGenerate}>Again</button>
               <button
                 className="closeButton"
-                onClick={() => setShowResult(false)}
+                onClick={() => {
+                  setShowResult(false);
+                  setShowProgress(false);
+                }}
               >
                 Close
               </button>
