@@ -8,6 +8,7 @@ function RandomNumberGenerator() {
   const [showResult, setShowResult] = useState(false);
   const [error, setError] = useState(""); // Add error state
   const [showProgress, setShowProgress] = useState(false);
+  const [showAgainButton, setShowAgainButton] = useState(false);
 
   const handleGenerate = () => {
     if (!min || !max || min == max) {
@@ -26,6 +27,7 @@ function RandomNumberGenerator() {
     setError(""); // Clear previous error
     setShowResult(true); // Show the resultBox with the progress bar immediately
     setShowProgress(true); // Start showing the progress bar
+    setShowAgainButton(false); // Hide the "Again" button initially
 
     // After 3 seconds delay:
     setTimeout(() => {
@@ -34,6 +36,7 @@ function RandomNumberGenerator() {
         Number(min);
       setRandomNumber(randNum);
       setShowProgress(false); // Hide the progress bar after the timeout
+      setShowAgainButton(true); // Show the "Again" button after result is presented
     }, 1500); // This is a 3-second delay
   };
 
@@ -51,8 +54,11 @@ function RandomNumberGenerator() {
               </p>
             )}
             <div className="buttonGroup">
-              <button onClick={handleGenerate}>Again</button>
+              {showAgainButton && (
+                <button onClick={handleGenerate}>Again</button>
+              )}
               <button
+                id="centeredCloseButton"
                 className="closeButton"
                 onClick={() => {
                   setShowResult(false);
@@ -81,7 +87,7 @@ function RandomNumberGenerator() {
         />
       </div>
       <button onClick={handleGenerate}>Generate</button>
-      {error && ( // Conditionally render error box
+      {error && (
         <div
           style={{
             marginTop: "10px",
@@ -95,8 +101,7 @@ function RandomNumberGenerator() {
           <i
             className="bx bxs-message-error"
             style={{ marginRight: "10px" }}
-          ></i>{" "}
-          {/* Add your icon here */}
+          ></i>
           {error}
         </div>
       )}
